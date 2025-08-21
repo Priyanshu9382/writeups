@@ -1,11 +1,4 @@
 # Writeups
-## Subtract - Misc 
-
-### Introduction / Context
-The knowledge of data analysis helped me for this.
-
----
-
 ### Problem Description
 ![alt text](./assets/image-14.png)
 
@@ -45,14 +38,14 @@ The problem had a avocado.jpg file attached and no other hint given
 - So I pulled both the files out using binwalk -e avocado.jpg
 - It created a _avocado.jpg.extracted directory with a file 188F7.zip in it.
 - Trying to unzip it prompted me for a password for justsomezip.zip
-- Therefore I tried to search for a password attack and found about dictionary attack using rockyou.txt wordlist. I used the following command 
+- As I had no other clue for password,therefore I tried to search for a password attack and found about dictionary attack using rockyou.txt wordlist. I used the following command 
 1. zip2john 188F7.zip > zip.hash
 2. john --wordlist=/usr/share/wordlists/rockyou.txt zip.hash
 - This gave me the password impassive3428
 - Opening it and trying to unzipping it result in a new prompt for flag.txt
 - checked the staticnoise.wav using exiftool and its description was a mock of like didn't we got the password of flag.txt in rockyou.txt
 ![alt-text](./assets/avocado_2.png)
-- We opened the staticnoise.wav in audacity to check and bingo!! got some text written there d41v3ron
+- We opened the staticnoise.wav in audacity to check and got some text written there d41v3ron
 ![alt-text](./assets/avocado_3.png)
 - Used it to unzip justsomezip.zip and it opened and gave the flag.txt and read the content using cat.
 ![alt-text](./assets/avocado_4.png)
@@ -79,15 +72,15 @@ Here, an index.zip file was given. When unzipped, it revealed an executable file
 ---
 
 ### Exploration / Approach
-As it was an executable file, I used objdump to get the assembly of the file.  
-I saw that it has some functions defined like store_flag, read_data, print_flag, exit.  
-In main function, I saw that there was a switch case where, the input was being compared to 1,2,3,4 and if it is greater than 4, it was being compared to 0x539(i.e., 1337), that was a sign of hidden option thing.  
-When inputed 1337, it is reading from the address 0x40a0 and storing in f.  
-Now I also saw that in read_data, it is reading from a nums array at 0x4060 address. I also saw that flag is at 0x40a0  
-When calculated the index (0x40a0 - 0x4060)/8 = 8. That means it is storing the flag at 8th index of nums array.  
-Then I again ran the program and also created a dummy flag.txt to check.  
-I chose option 2 to read_data and inputed 8th index and got the flag.  
-Now I ran the instance and did the same process and got the flag.
+- As it was an executable file, I used objdump to get the assembly of the file.  
+- I saw that it has some functions defined like store_flag, read_data, print_flag, exit.  
+- In main function, I saw that there was a switch case where, the input was being compared to 1,2,3,4 and if it is greater than 4, it was being compared to 0x539(i.e., 1337), that was a sign of hidden option thing.  
+- When inputed 1337, it is reading from the address 0x40a0 and storing in f.  
+- Now I also saw that in read_data, it is reading from a nums array at 0x4060 address. I also saw that flag is at 0x40a0  
+- When calculated the index (0x40a0 - 0x4060)/8 = 8. That means it is storing the flag at 8th index of nums array.  
+- Then I again ran the program and also created a dummy flag.txt to check.  
+- I chose option 2 to read_data and inputed 8th index and got the flag.  
+- Now I ran the instance and did the same process and got the flag.
 
 ---
 
