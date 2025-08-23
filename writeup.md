@@ -1,4 +1,15 @@
 # Writeups
+## Information
+
+### Team Information: 
+
+### CTFkers
+
+Name, CTFTime, Discord
+1. Priyanshu Mishra: Random@69, random_6905_60723
+2. Yug Bargaway: Karlos1928, gameryug6329
+
+![alt text](./assets/image.png)
 ### Problem Description
 ![alt text](./assets/image-14.png)
 
